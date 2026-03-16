@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Evan Frazer | IT &amp; Software</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --charcoal:  #1c1917;
+      --charcoal2: #292524;
+      --accent:    #1B3A5C;
+      --accent2:   #2A5298;
+      --ink:       #1c1917;
+      --mid:       #57534e;
+      --muted:     #a8a29e;
+      --rule:      #d6cfc4;
+      --bg:        #f5f0e8;
+      --card:      #faf6ef;
+      --nav-bg:    rgba(245,240,232,0.94);
+      --tag-bg:    #e4e8f0;
+      --tag-color: #1B3A5C;
+      --shadow:    rgba(28,25,23,0.07);
+      --section-pad: 5rem 2.5rem;
+      --content-w: 900px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ─────────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--nav-bg);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--rule);
+      padding: 0 2.5rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.05rem;
+      color: var(--charcoal);
+      letter-spacing: 0.01em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--charcoal); }
+
+    /* ── HERO ────────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 0 2.5rem;
+      max-width: var(--content-w);
+      margin: 0 auto;
+      padding-top: 56px;
+    }
+
+    .hero-inner { max-width: 620px; }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.4rem;
+      opacity: 0;
+      transform: translateY(12px);
+      animation: fadeUp 0.6s ease forwards 0.1s;
+    }
+
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.6rem, 6vw, 4.2rem);
+      line-height: 1.1;
+      color: var(--charcoal);
+      margin-bottom: 1.6rem;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.7s ease forwards 0.2s;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-bio {
+      font-size: 1.05rem;
+      color: var(--mid);
+      line-height: 1.8;
+      max-width: 520px;
+      margin-bottom: 2.4rem;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.7s ease forwards 0.35s;
+    }
+
+    .hero-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.7s ease forwards 0.5s;
+    }
+
+    /* ── BUTTONS ─────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.68rem 1.5rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--charcoal);
+      color: var(--bg);
+      border: 1.5px solid var(--charcoal);
+    }
+
+    .btn-primary:hover {
+      background: var(--charcoal2);
+      border-color: var(--charcoal2);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px var(--shadow);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--charcoal);
+      border: 1.5px solid var(--charcoal);
+    }
+
+    .btn-ghost:hover {
+      background: var(--charcoal);
+      color: var(--bg);
+      transform: translateY(-1px);
+    }
+
+    /* ── SECTIONS ────────────────────────────────────────────── */
+    .section-wrap {
+      max-width: var(--content-w);
+      margin: 0 auto;
+      padding: var(--section-pad);
+    }
+
+    /* Remove top padding when two sections are adjacent */
+    .section-wrap + .section-wrap { padding-top: 0; }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.55rem;
+    }
+
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      color: var(--charcoal);
+      margin-bottom: 2.8rem;
+      padding-bottom: 1.1rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    /* ── PROJECTS ────────────────────────────────────────────── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 2rem;
+      transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    .project-card:hover {
+      border-color: #c4bbb0;
+      box-shadow: 0 8px 28px var(--shadow);
+      transform: translateY(-2px);
+    }
+
+    .project-card:hover::before { transform: scaleX(1); }
+
+    .project-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      margin-bottom: 1.3rem;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .project-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .project-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.35rem;
+      color: var(--charcoal);
+      margin-bottom: 0.3rem;
+    }
+
+    .project-tagline {
+      font-size: 0.87rem;
+      color: var(--muted);
+      font-style: italic;
+      margin-bottom: 1.1rem;
+    }
+
+    .project-desc {
+      font-size: 0.92rem;
+      color: var(--mid);
+      line-height: 1.75;
+      margin-bottom: 1.4rem;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .tag {
+      font-size: 0.71rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 0.22rem 0.6rem;
+      border-radius: 3px;
+      background: var(--tag-bg);
+      color: var(--tag-color);
+    }
+
+    .project-highlights {
+      list-style: none;
+      padding: 0;
+    }
+
+    .project-highlights li {
+      font-size: 0.88rem;
+      color: var(--mid);
+      padding: 0.35rem 0 0.35rem 1.1rem;
+      position: relative;
+      border-top: 1px solid var(--rule);
+      line-height: 1.5;
+    }
+
+    .project-highlights li:last-child { border-bottom: 1px solid var(--rule); }
+
+    .project-highlights li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 0.75rem;
+      top: 0.38rem;
+    }
+
+    /* ── SKILLS ──────────────────────────────────────────────── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+    }
+
+    .skill-group {
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 1.4rem 1.5rem;
+    }
+
+    .skill-group-label {
+      font-size: 0.71rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.85rem;
+    }
+
+    .skill-group ul { list-style: none; padding: 0; }
+
+    .skill-group li {
+      font-size: 0.88rem;
+      color: var(--mid);
+      padding: 0.2rem 0;
+      line-height: 1.5;
+    }
+
+    /* ── ABOUT ───────────────────────────────────────────────── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 3.5rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      font-size: 0.96rem;
+      color: var(--mid);
+      line-height: 1.85;
+      margin-bottom: 1.2rem;
+    }
+
+    .about-text p:last-child { margin-bottom: 0; }
+
+    .about-facts { display: flex; flex-direction: column; gap: 0.85rem; }
+
+    .fact {
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 1rem 1.3rem;
+    }
+
+    .fact-label {
+      font-size: 0.69rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .fact-value {
+      font-size: 0.9rem;
+      color: var(--ink);
+      line-height: 1.55;
+    }
+
+    /* ── CONTACT ─────────────────────────────────────────────── */
+    .contact-section {
+      background: var(--charcoal);
+      padding: 5rem 2.5rem;
+    }
+
+    .contact-section .inner {
+      max-width: var(--content-w);
+      margin: 0 auto;
+    }
+
+    .contact-section .section-label { color: #8a9ab8; }
+
+    .contact-section .section-title {
+      color: var(--bg);
+      border-bottom-color: rgba(245,240,232,0.12);
+    }
+
+    .contact-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      max-width: 520px;
+    }
+
+    .contact-item {
+      background: rgba(245,240,232,0.06);
+      border: 1px solid rgba(245,240,232,0.12);
+      border-radius: 6px;
+      padding: 1.1rem 1.6rem;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .contact-item:hover {
+      background: rgba(245,240,232,0.11);
+      transform: translateY(-2px);
+    }
+
+    .contact-item-label {
+      font-size: 0.69rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #8a9ab8;
+      margin-bottom: 0.3rem;
+    }
+
+    .contact-item-value {
+      font-size: 0.92rem;
+      color: var(--bg);
+    }
+
+    /* ── FOOTER ──────────────────────────────────────────────── */
+    footer {
+      background: var(--charcoal2);
+      border-top: 1px solid rgba(245,240,232,0.07);
+      text-align: center;
+      padding: 1.5rem 2.5rem;
+      font-size: 0.78rem;
+      color: rgba(245,240,232,0.3);
+    }
+
+    /* ── ANIMATIONS ──────────────────────────────────────────── */
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      :root { --section-pad: 3.5rem 1.5rem; }
+      nav { padding: 0 1.5rem; }
+      .nav-links { gap: 1.2rem; }
+      .hero { padding: 0 1.5rem; padding-top: 56px; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .contact-row { max-width: 100%; }
+    }
+
+    @media (max-width: 480px) {
+      .nav-links { gap: 1rem; }
+      .nav-links a { font-size: 0.75rem; }
+      .skills-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-name">Evan Frazer</a>
+    <ul class="nav-links">
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-inner">
+      <span class="hero-eyebrow">Indianapolis, IN &nbsp;·&nbsp; IT &amp; Software</span>
+      <h1>I keep systems running.<br><em>I also build things from scratch.</em></h1>
+      <p class="hero-bio">
+        Three years of enterprise IT support at IHCDA, CompTIA A+ certified, with nights and weekends spent building full-stack applications and self-hosted infrastructure. I bridge the gap between keeping systems reliable and engineering what comes next.
+      </p>
+      <div class="hero-links">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="mailto:frazerevan18@gmail.com" class="btn btn-ghost">Get in Touch</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <div id="projects" class="section-wrap">
+    <div class="section-label">Selected Work</div>
+    <div class="section-title">Projects</div>
+
+    <div class="projects-grid">
+
+      <!-- Wristband -->
+      <div class="project-card reveal">
+        <div class="project-icon"><img src="wristband-icon.png" alt="Wristband app icon" /></div>
+        <div class="project-name">Wristband</div>
+        <div class="project-tagline">Concert tracking, reimagined.</div>
+        <p class="project-desc">
+          A friend was tracking every concert he had attended in his phone's notes app. Having used Letterboxd for films, it was clear that experience deserved to exist for live music. Wristband is the result: a full-stack social web application for logging shows, rating performances, tracking setlists, and following friends. It runs in production on a self-hosted homelab server.
+        </p>
+        <div class="tag-list">
+          <span class="tag">React 18</span>
+          <span class="tag">Node.js</span>
+          <span class="tag">Express</span>
+          <span class="tag">Supabase</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">Docker</span>
+          <span class="tag">PWA</span>
+          <span class="tag">Spotify API</span>
+          <span class="tag">Setlist.fm API</span>
+        </div>
+        <ul class="project-highlights">
+          <li>Real-time social feed with privacy-focused follow system via Supabase Realtime</li>
+          <li>Smart autocomplete using Spotify &amp; Setlist.fm APIs for artist images and venue data</li>
+          <li>Statistics dashboard visualizing top artists, venues, and year-in-review</li>
+          <li>Installable as a native-like PWA on iOS and Android</li>
+          <li>Full Docker Compose deployment with Nginx reverse proxy</li>
+        </ul>
+      </div>
+
+      <!-- Repflow -->
+      <div class="project-card reveal" style="transition-delay:0.1s">
+        <div class="project-icon"><img src="repflow-icon.png" alt="Repflow app icon" /></div>
+        <div class="project-name">Repflow</div>
+        <div class="project-tagline">Strength training, engineered.</div>
+        <p class="project-desc">
+          A workout app with a lifetime license switched to a subscription model, retroactively voiding what had already been paid for. Rather than accept that, Repflow was built as a replacement: native iOS, fully local, no account, no subscription. Then came the features that were always missing: NLP logging, algorithmic programming, and HealthKit integration.
+        </p>
+        <div class="tag-list">
+          <span class="tag">Swift 5.9</span>
+          <span class="tag">SwiftUI</span>
+          <span class="tag">iOS 17+</span>
+          <span class="tag">HealthKit</span>
+          <span class="tag">MVVM</span>
+          <span class="tag">NLP</span>
+        </div>
+        <ul class="project-highlights">
+          <li>NLP-powered quick log: type "Bench 135 for 10" to instantly record a set</li>
+          <li>Algorithmic workout generation tailored to equipment and training goals</li>
+          <li>Bidirectional HealthKit sync for calories and heart rate</li>
+          <li>50+ exercise library with progression tracking and personal records</li>
+          <li>Strict MVVM architecture with a centralized design system</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <div id="skills" class="section-wrap reveal">
+    <div class="section-label">Technical Proficiency</div>
+    <div class="section-title">Skills &amp; Certifications</div>
+
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-label">Certifications</div>
+        <ul>
+          <li>CompTIA A+</li>
+          <li>AWS Cloud Quest: Cloud Practitioner</li>
+          <li>DaVinci Resolve 18: Editing</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Systems &amp; Infrastructure</div>
+        <ul>
+          <li>Windows 10/11 Administration</li>
+          <li>Active Directory</li>
+          <li>Proxmox / Hypervisors</li>
+          <li>Docker &amp; Containers</li>
+          <li>Endpoint Management</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Cloud &amp; DevOps</div>
+        <ul>
+          <li>AWS</li>
+          <li>Supabase</li>
+          <li>Docker Compose</li>
+          <li>Nginx</li>
+          <li>GitHub Actions</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Development</div>
+        <ul>
+          <li>React / JavaScript</li>
+          <li>Node.js / Express</li>
+          <li>Swift / SwiftUI</li>
+          <li>PostgreSQL / SQL</li>
+          <li>REST APIs</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Tools &amp; Platforms</div>
+        <ul>
+          <li>Rapid7</li>
+          <li>Help Desk / ITSM</li>
+          <li>LM Studio / Ollama</li>
+          <li>Homelab Infrastructure</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Creative</div>
+        <ul>
+          <li>DaVinci Resolve</li>
+          <li>Videography &amp; Photography</li>
+          <li>3D Printing</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div id="about" class="section-wrap reveal">
+    <div class="section-label">Background</div>
+    <div class="section-title">About</div>
+
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I'm an IT Support Specialist at the Indiana Housing &amp; Community Development Authority, where I handle everything from endpoint management and vendor coordination to disaster recovery planning and Windows 11 migration. Day-to-day, I keep things running. After hours, I build things.
+        </p>
+        <p>
+          The projects on this page started as personal tools. I noticed a friend tracking concerts in his notes app and wanted something better. A workout app I had paid for switched to a subscription model, so I built a replacement. Both ended up as real production-grade applications: Wristband runs on a self-hosted homelab server, and Repflow is in daily use on my phone.
+        </p>
+        <p>
+          Both projects were built with AI assistance as a core part of the development workflow, using tools including Google Antigravity, OpenAI Codex, locally run LLMs, and other state-of-the-art models. This reflects a deliberate approach to modern development: identifying the right tools, understanding their output, and using them to get from idea to working product efficiently.
+        </p>
+        <p>
+          I hold a B.A. in Communication Studies from IUPUI, with a minor in Video Production. I'm actively pursuing growth into systems and cloud engineering.
+        </p>
+      </div>
+      <div class="about-facts">
+        <div class="fact">
+          <div class="fact-label">Current Role</div>
+          <div class="fact-value">IT Technical Support Specialist, IHCDA</div>
+        </div>
+        <div class="fact">
+          <div class="fact-label">Location</div>
+          <div class="fact-value">Indianapolis, IN</div>
+        </div>
+        <div class="fact">
+          <div class="fact-label">Education</div>
+          <div class="fact-value">B.A. Communication Studies, IUPUI · Minor: Video Production · Dean's List, Fall 2019</div>
+        </div>
+        <div class="fact">
+          <div class="fact-label">Certifications</div>
+          <div class="fact-value">CompTIA A+ · AWS Cloud Quest: Cloud Practitioner · DaVinci Resolve 18: Editing</div>
+        </div>
+        <div class="fact">
+          <div class="fact-label">Interests</div>
+          <div class="fact-value">Music (Drums, Bass, Guitar) · Homelab · PC Building · 3D Printing · Videography &amp; Photography</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div id="contact" class="contact-section">
+    <div class="inner">
+      <div class="section-label">Get in Touch</div>
+      <div class="section-title">Contact</div>
+      <div class="contact-row">
+        <a href="mailto:frazerevan18@gmail.com" class="contact-item">
+          <div class="contact-item-label">Email</div>
+          <div class="contact-item-value">frazerevan18@gmail.com</div>
+        </a>
+        <div class="contact-item">
+          <div class="contact-item-label">Location</div>
+          <div class="contact-item-value">Indianapolis, IN</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2026 Evan Frazer
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
