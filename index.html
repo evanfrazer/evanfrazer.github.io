@@ -252,7 +252,7 @@
       display: flex; justify-content: space-between; align-items: flex-start; gap: 2rem;
     }
     .hero-bio { font-size: .93rem; color: var(--on-surface-var); line-height: 1.78; max-width: 640px; }
-    .hero-btns { display: flex; gap: 1rem; flex-shrink: 0; }
+    .hero-btns { display: flex; flex-wrap: wrap; gap: 1rem; flex-shrink: 0; }
     .btn-dark {
       font-family: var(--font-body); font-size: .7rem; font-weight: 700;
       letter-spacing: .08em; text-transform: uppercase;
@@ -408,6 +408,14 @@
       display: inline-block; transition: transform .2s;
     }
     .btn-primary-lg:hover { transform: scale(1.04); }
+    .btn-neutral-lg {
+      font-family: var(--font-head); font-size: .8rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      background: var(--surface-highest); color: var(--on-surface);
+      padding: 1.1rem 2.5rem; border-radius: .4rem;
+      display: inline-block; transition: background .2s;
+    }
+    .btn-neutral-lg:hover { background: var(--surface-dim); }
 
     /* Contact info cards */
     .contact-cards {
@@ -547,8 +555,7 @@
           <div class="hero-btns">
             <a href="#work" class="btn-dark">View Work</a>
             <a href="mailto:frazerevan18&#64;gmail.com" class="btn-outline">Get in Touch</a>
-            <!-- To add a resume button once a public-safe PDF (no phone or home address) is uploaded:
-                 <a href="EvanFrazer_Resume.pdf" class="btn-outline">Resume (PDF)</a> -->
+            <a href="EvanFrazer_Resume.pdf" target="_blank" rel="noopener" class="btn-outline">Resume (PDF)</a>
           </div>
         </div>
       </div>
@@ -767,7 +774,7 @@
                 <span class="exp-role">IT Technical Support Specialist</span>
               </div>
               <ul class="exp-bullets">
-                <li><span class="dash">&mdash;</span><span>Migrated <strong>200+ endpoints</strong> from Windows 10 to Windows 11 with the state IOT team ahead of the October 2025 end-of-support deadline, coordinating scheduling, software requirements, device inventory, and post-migration support with zero significant service interruptions</span></li>
+                <li><span class="dash">&mdash;</span><span>Migrated <strong>140+ endpoints</strong> from Windows 10 to Windows 11 with the state IOT team ahead of the October 2025 end-of-support deadline, coordinating scheduling, software requirements, device inventory, and post-migration support with zero significant service interruptions</span></li>
                 <li><span class="dash">&mdash;</span><span>Delivered an agency-wide refresh of <strong>151 Dell laptops</strong>, coordinating procurement, compatibility surveys, scheduling, and post-deployment support; tested candidate models as a pilot user before final selection</span></li>
                 <li><span class="dash">&mdash;</span><span>Use <strong>Rapid7</strong> to scan agency devices for vulnerabilities, remediate findings, and report results</span></li>
                 <li><span class="dash">&mdash;</span><span>Onboard remote staff to the agency&rsquo;s <strong>Amazon WorkSpaces</strong> (AWS) virtual desktop environment, handling connection setup and user training</span></li>
@@ -856,6 +863,7 @@
         <h2 class="contact-h2">LET&rsquo;S WORK<br/>TOGETHER.</h2>
         <div class="contact-btns">
           <a href="mailto:frazerevan18&#64;gmail.com" class="btn-primary-lg">Send an Email</a>
+          <a href="EvanFrazer_Resume.pdf" target="_blank" rel="noopener" class="btn-neutral-lg">Resume (PDF)</a>
         </div>
         <div class="contact-cards">
           <a href="mailto:frazerevan18&#64;gmail.com" class="contact-card">
