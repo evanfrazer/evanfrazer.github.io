@@ -6,13 +6,26 @@
   <!-- Security policy: scripts are disabled. If you add JS or new external hosts, update this or they will be blocked. -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
   <title>Evan Frazer | IT &amp; Systems Engineering</title>
+  <meta name="description" content="Evan Frazer: IT specialist in Indianapolis with 4+ years in endpoint, virtual desktop, and vulnerability management, plus a self-built Proxmox/TrueNAS homelab. Seeking Systems Administrator and Cloud Engineer roles.">
+  <meta name="theme-color" content="#fcf9f8">
+  <link rel="canonical" href="https://evanfrazer.github.io/">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <!-- Link previews. To get a preview image, add a 1200x630 og-image.png next to this file and add:
+       <meta property="og:image" content="https://evanfrazer.github.io/og-image.png">
+       <meta name="twitter:card" content="summary_large_image">  (and change the summary card below) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Evan Frazer | IT &amp; Systems Engineering">
+  <meta property="og:description" content="IT specialist, homelab builder, and app developer in Indianapolis. Seeking Systems Administrator and Cloud Engineer roles.">
+  <meta property="og:url" content="https://evanfrazer.github.io/">
+  <meta name="twitter:card" content="summary">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Evan Frazer","url":"https://evanfrazer.github.io/","jobTitle":"IT Technical Support Specialist","sameAs":["https://github.com/evanfrazer"],"address":{"@type":"PostalAddress","addressLocality":"Indianapolis","addressRegion":"IN","addressCountry":"US"}}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
+    section[id] { scroll-margin-top: 5rem; }
 
     :root {
       --surface:         #fcf9f8;
@@ -42,13 +55,21 @@
 
     a { color: inherit; text-decoration: none; }
 
-    .material-symbols-outlined {
-      font-family: 'Material Symbols Outlined';
-      font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;
-      font-style: normal;
-      display: inline-block;
-      line-height: 1;
-      vertical-align: middle;
+    :focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; border-radius: .2rem; }
+    .btn-hire:focus-visible, .btn-primary-lg:focus-visible { outline-color: var(--on-surface); }
+
+    .skip {
+      position: absolute; left: 1rem; top: -4rem; z-index: 200;
+      background: var(--on-surface); color: var(--surface);
+      font-size: .8rem; font-weight: 700; padding: .6rem 1rem; border-radius: .4rem;
+      transition: top .15s;
+    }
+    .skip:focus { top: 1rem; }
+
+    /* Inline SVG icons (replaces the external icon font) */
+    .icon {
+      width: 1em; height: 1em; display: inline-block; vertical-align: middle; flex-shrink: 0;
+      fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round;
     }
 
     /* Animations */
@@ -84,6 +105,14 @@
       .reveal, .reveal-d1 { opacity: 1; transform: none; }
     }
 
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .anim-1, .anim-2, .anim-3, .anim-4, .anim-5 { animation: none; }
+      .reveal, .reveal-d1 { opacity: 1; transform: none; animation: none; }
+      .ticker-inner { animation: none; }
+      .btn-hire, .btn-dark, .btn-primary-lg, .contact-card { transition: none; }
+    }
+
     /* Layout */
     .wrap { max-width: var(--content-w); margin: 0 auto; padding: 0 3rem; }
 
@@ -103,14 +132,13 @@
     }
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a {
-      font-family: var(--font-head); font-size: .73rem; font-weight: 700;
+      font-family: var(--font-head); font-size: .75rem; font-weight: 700;
       letter-spacing: .07em; text-transform: uppercase;
-      color: rgba(28,27,27,.42); transition: color .2s;
+      color: rgba(28,27,27,.66); transition: color .2s;
     }
-    .nav-links a.active { color: var(--primary); border-bottom: 2px solid var(--primary); padding-bottom: 2px; }
     .nav-links a:hover  { color: var(--primary); }
     .btn-hire {
-      font-family: var(--font-body); font-size: .68rem; font-weight: 700;
+      font-family: var(--font-body); font-size: .7rem; font-weight: 700;
       letter-spacing: .1em; text-transform: uppercase;
       background: var(--primary); color: var(--on-primary);
       padding: .5rem 1.35rem; border-radius: .4rem;
@@ -144,9 +172,9 @@
       width: 6.5rem; height: 6.5rem; border-radius: 50%;
       border: 1px solid rgba(195,197,217,.4);
       display: flex; align-items: center; justify-content: center;
-      color: var(--primary);
+      color: var(--primary); font-size: 1.5rem;
     }
-    .scroll-label { font-size: .58rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(28,27,27,.28); }
+    .scroll-label { font-size: .7rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(28,27,27,.6); }
 
     /* Hero grid */
     .hero-grid { display: grid; grid-template-columns: 7fr 5fr; gap: 1.5rem; }
@@ -173,20 +201,19 @@
       padding: 1.5rem 1.5rem .75rem;
     }
     .terminal-label {
-      font-family: monospace; font-size: .6rem; letter-spacing: .14em;
-      text-transform: uppercase; color: rgba(0,65,200,.6);
+      font-family: monospace; font-size: .7rem; letter-spacing: .14em;
+      text-transform: uppercase; color: rgba(0,65,200,.85);
       margin-bottom: .85rem; text-align: center;
     }
     .terminal-lines { font-family: monospace; font-size: .78rem; line-height: 1.9; }
     .terminal-lines .dot-on  { color: var(--primary); }
-    .terminal-lines .dot-off { color: rgba(28,27,27,.2); }
     .hv-footer {
       position: relative; z-index: 2;
       padding: .85rem 1.5rem 1.1rem;
       border-top: 1px solid rgba(195,197,217,.2);
     }
     .hv-footer p { font-family: var(--font-head); font-size: .95rem; font-weight: 700; margin-bottom: .15rem; }
-    .hv-footer span { font-size: .58rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(28,27,27,.4); }
+    .hv-footer span { font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(28,27,27,.66); }
 
     /* Side cards */
     .hero-cards { display: flex; flex-direction: column; gap: 1.5rem; }
@@ -199,9 +226,9 @@
     .hc-icon { font-size: 1.75rem; margin-bottom: .4rem; }
     .hero-card.blue  .hc-icon { color: rgba(255,255,255,.6); }
     .hero-card.light .hc-icon { color: var(--primary); }
-    .hc-label { font-size: .6rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; margin-bottom: .25rem; }
-    .hero-card.blue  .hc-label { color: rgba(255,255,255,.52); }
-    .hero-card.light .hc-label { color: rgba(28,27,27,.36); }
+    .hc-label { font-size: .7rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; margin-bottom: .25rem; }
+    .hero-card.blue  .hc-label { color: rgba(255,255,255,.8); }
+    .hero-card.light .hc-label { color: rgba(28,27,27,.66); }
     .hc-title { font-family: var(--font-head); font-weight: 700; font-size: 1rem; line-height: 1.45; }
     .hero-card.blue  .hc-title { color: var(--on-primary); }
     .hero-card.light .hc-title { color: var(--on-surface); }
@@ -216,7 +243,7 @@
     .hero-bio { font-size: .93rem; color: var(--on-surface-var); line-height: 1.78; max-width: 640px; }
     .hero-btns { display: flex; gap: 1rem; flex-shrink: 0; }
     .btn-dark {
-      font-family: var(--font-body); font-size: .68rem; font-weight: 700;
+      font-family: var(--font-body); font-size: .7rem; font-weight: 700;
       letter-spacing: .08em; text-transform: uppercase;
       background: var(--on-surface); color: var(--surface);
       padding: .75rem 1.6rem; border-radius: .4rem;
@@ -224,7 +251,7 @@
     }
     .btn-dark:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(28,27,27,.14); }
     .btn-outline {
-      font-family: var(--font-body); font-size: .68rem; font-weight: 700;
+      font-family: var(--font-body); font-size: .7rem; font-weight: 700;
       letter-spacing: .08em; text-transform: uppercase;
       background: transparent; color: var(--on-surface);
       padding: .75rem 1.6rem; border-radius: .4rem;
@@ -240,6 +267,7 @@
     }
     .ticker-inner { display: flex; animation: ticker 30s linear infinite; width: max-content; }
     .ticker-inner:hover { animation-play-state: paused; }
+    .ticker-set { display: flex; flex-shrink: 0; }
     .ticker-item {
       font-family: var(--font-head); font-size: .78rem; font-weight: 700;
       letter-spacing: .12em; text-transform: uppercase;
@@ -259,15 +287,14 @@
     .project-card {
       background: var(--surface); border: 1px solid rgba(195,197,217,.22);
       border-radius: .75rem; overflow: hidden; position: relative;
-      transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
-      cursor: pointer;
+      transition: box-shadow .3s ease, border-color .3s ease;
     }
     .project-card::before {
       content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
       background: var(--primary); transform: scaleX(0); transform-origin: left;
       transition: transform .3s ease; z-index: 5;
     }
-    .project-card:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(28,27,27,.1); border-color: rgba(195,197,217,.5); }
+    .project-card:hover { box-shadow: 0 16px 40px rgba(28,27,27,.1); border-color: rgba(195,197,217,.5); }
     .project-card:hover::before { transform: scaleX(1); }
 
     .project-banner {
@@ -276,6 +303,8 @@
     }
     .banner-wristband { background: linear-gradient(135deg,#0a1628,#1B3A5C,#2A5298); }
     .banner-repflow   { background: linear-gradient(135deg,#0d1f0d,#1a3d1a,#2d6e2d); }
+    .banner-homelab   { background: linear-gradient(135deg,#0b1a24,#123a4a,#1d6f85); }
+    .banner-remote    { background: linear-gradient(135deg,#1a1030,#3b1f6b,#6b3fb0); }
     .banner-grid-overlay {
       position: absolute; inset: 0; opacity: .09;
       background-image: linear-gradient(rgba(255,255,255,.4) 1px,transparent 1px),
@@ -288,20 +317,20 @@
       box-shadow: 0 8px 32px rgba(0,0,0,.35); border: 2px solid rgba(255,255,255,.15);
     }
     .app-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .app-icon.glyph { display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,.08); }
+    .app-icon.glyph .icon { font-size: 2.4rem; color: #fff; }
     .banner-name { font-family: var(--font-head); font-weight: 700; font-size: 1.45rem; color: #fff; letter-spacing: -.01em; }
     .banner-tags { position: absolute; bottom: 1rem; left: 1rem; display: flex; flex-wrap: wrap; gap: .35rem; z-index: 3; }
     .tag {
-      font-size: .58rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+      font-size: .7rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
       padding: .2rem .55rem; border-radius: .2rem;
-      background: rgba(255,255,255,.12); color: rgba(255,255,255,.82); backdrop-filter: blur(4px);
+      background: rgba(255,255,255,.12); color: rgba(255,255,255,.9); backdrop-filter: blur(4px);
     }
 
     .project-body { padding: 2rem; }
-    .project-category { font-size: .62rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--primary); margin-bottom: .3rem; display: block; }
+    .project-category { font-size: .7rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--primary); margin-bottom: .3rem; display: block; }
     .project-head-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
     .project-name { font-family: var(--font-head); font-size: 1.3rem; font-weight: 700; }
-    .project-arrow { font-size: 1.25rem; color: rgba(28,27,27,.25); transition: color .2s, transform .2s; }
-    .project-card:hover .project-arrow { color: var(--primary); transform: translate(3px,-3px); }
     .project-desc { font-size: .875rem; color: var(--on-surface-var); line-height: 1.75; margin-bottom: 1.4rem; }
     .project-bullets { border-top: 1px solid rgba(195,197,217,.22); padding-top: 1.2rem; list-style: none; display: flex; flex-direction: column; gap: .6rem; }
     .project-bullets li { display: flex; gap: .7rem; font-size: .8rem; color: var(--on-surface-var); line-height: 1.5; }
@@ -312,7 +341,7 @@
     .skills-layout { display: grid; grid-template-columns: 4fr 8fr; gap: 4rem; }
     .skills-head { font-family: var(--font-head); font-size: 1.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: -.02em; position: sticky; top: 5.5rem; }
     .skills-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 3.5rem 2rem; }
-    .skill-group-label { font-size: .65rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--primary); padding-bottom: .5rem; border-bottom: 1px solid rgba(195,197,217,.22); margin-bottom: 1.2rem; }
+    .skill-group-label { font-size: .7rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--primary); padding-bottom: .5rem; border-bottom: 1px solid rgba(195,197,217,.22); margin-bottom: 1.2rem; }
     .skill-group ul { list-style: none; }
     .skill-group li { font-size: .875rem; font-weight: 500; padding: .28rem 0; }
 
@@ -322,7 +351,7 @@
     .exp-link:hover { border-color: var(--primary); }
     .exp-list { display: flex; flex-direction: column; gap: 5rem; }
     .exp-row { display: grid; grid-template-columns: 3fr 9fr; gap: 2rem; align-items: start; }
-    .exp-date { font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--on-surface-var); padding-top: .3rem; }
+    .exp-date { font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--on-surface-var); padding-top: .3rem; }
     .exp-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.2rem; }
     .exp-employer { font-family: var(--font-head); font-size: 1.4rem; font-weight: 700; }
     .exp-role { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--primary); }
@@ -331,6 +360,19 @@
     .exp-bullets li .dash { color: var(--primary); font-weight: 700; flex-shrink: 0; }
     .exp-bullets li strong { color: var(--on-surface); font-weight: 600; }
 
+    /* Collapsible extra bullets (CSS-only, no JS) */
+    .exp-more { margin-top: .75rem; max-width: 680px; }
+    .exp-more summary {
+      display: inline-block; list-style: none; cursor: pointer; margin-bottom: .75rem;
+      font-family: var(--font-head); font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--primary); border-bottom: 2px solid rgba(0,65,200,.2); padding-bottom: 2px;
+    }
+    .exp-more summary::-webkit-details-marker { display: none; }
+    .exp-more summary:hover { border-color: var(--primary); }
+    .exp-more .more-open { display: none; }
+    .exp-more[open] .more-open { display: inline; }
+    .exp-more[open] .more-closed { display: none; }
+
     /* About blurb */
     .about-grid { margin-top: 5rem; display: grid; grid-template-columns: 7fr 5fr; gap: 2.5rem; align-items: start; }
     .about-text p { font-size: .875rem; color: var(--on-surface-var); line-height: 1.85; margin-bottom: 1.2rem; }
@@ -338,13 +380,13 @@
     .fact-cards { display: flex; flex-direction: column; gap: .75rem; }
     .fact-card { background: var(--surface); border: 1px solid rgba(195,197,217,.22); border-radius: .75rem; padding: 1.2rem 1.4rem; display: flex; gap: 1rem; align-items: flex-start; }
     .fact-icon { font-size: 1.2rem; color: var(--primary); flex-shrink: 0; margin-top: 1px; }
-    .fact-label { font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(28,27,27,.33); margin-bottom: .2rem; }
+    .fact-label { font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(28,27,27,.66); margin-bottom: .2rem; }
     .fact-value { font-size: .875rem; font-weight: 500; line-height: 1.55; }
-    .fact-value .muted { color: rgba(28,27,27,.42); }
+    .fact-value .muted { color: rgba(28,27,27,.66); }
 
     /* ── CONTACT ─────────────────────── */
     .contact-section { padding: 8rem 0; text-align: center; }
-    .contact-eyebrow { font-size: .68rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--primary); display: block; margin-bottom: 1.4rem; }
+    .contact-eyebrow { font-size: .7rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--primary); display: block; margin-bottom: 1.4rem; }
     .contact-h2 { font-family: var(--font-head); font-size: clamp(2.4rem,6vw,5rem); font-weight: 700; line-height: 1.05; letter-spacing: -.03em; margin-bottom: 3rem; }
     .contact-btns { display: flex; justify-content: center; gap: 1.25rem; margin-bottom: 4rem; flex-wrap: wrap; }
     .btn-primary-lg {
@@ -355,14 +397,6 @@
       display: inline-block; transition: transform .2s;
     }
     .btn-primary-lg:hover { transform: scale(1.04); }
-    .btn-neutral-lg {
-      font-family: var(--font-head); font-size: .8rem; font-weight: 700;
-      letter-spacing: .1em; text-transform: uppercase;
-      background: var(--surface-highest); color: var(--on-surface);
-      padding: 1.1rem 2.5rem; border-radius: .4rem;
-      display: inline-block; transition: background .2s;
-    }
-    .btn-neutral-lg:hover { background: var(--surface-dim); }
 
     /* Contact info cards */
     .contact-cards {
@@ -375,24 +409,27 @@
       flex: 1; min-width: 0;
       transition: transform .2s, box-shadow .2s; display: block;
     }
-    .contact-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(28,27,27,.09); }
-    .contact-card-label { font-size: .58rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(28,27,27,.33); margin-bottom: .3rem; }
+    a.contact-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(28,27,27,.09); }
+    .contact-card-label { font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(28,27,27,.66); margin-bottom: .3rem; }
     .contact-card-value { font-size: .82rem; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
     /* ── FOOTER ──────────────────────── */
     footer { background: var(--surface-low); border-top: 1px solid rgba(195,197,217,.18); padding: 3.5rem 0; }
     .footer-inner { max-width: var(--content-w); margin: 0 auto; padding: 0 3rem; display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; }
     .footer-name { font-family: var(--font-head); font-size: 1rem; font-weight: 900; text-transform: uppercase; letter-spacing: -.01em; margin-bottom: .2rem; }
-    .footer-copy { font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(28,27,27,.28); }
+    .footer-copy { font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(28,27,27,.66); }
     .footer-links { display: flex; gap: 2rem; }
-    .footer-links a { font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(28,27,27,.28); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 8px; transition: color .3s; }
+    .footer-links a { font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(28,27,27,.66); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 8px; transition: color .3s; }
     .footer-links a:hover { color: var(--primary); }
 
     /* ── RESPONSIVE ──────────────────── */
     @media (max-width: 900px) {
+      section[id] { scroll-margin-top: 7rem; }
       .wrap { padding: 0 1.5rem; }
-      .nav-inner { padding: 1.1rem 1.5rem; }
-      .nav-links { display: none; }
+      /* Section links move to a second row under the logo instead of disappearing */
+      .nav-inner { padding: .9rem 1.5rem .6rem; flex-wrap: wrap; row-gap: .5rem; }
+      .nav-links { order: 3; width: 100%; justify-content: space-between; flex-wrap: wrap; gap: .25rem 1rem; }
+      .hero { padding-top: 8.25rem; }
       .hero-grid { grid-template-columns: 1fr; }
       .scroll-indicator { display: none; }
       .hero-bio-strip { flex-direction: column; }
@@ -410,16 +447,25 @@
       .skills-grid { grid-template-columns: 1fr; }
       .contact-card { min-width: 45%; }
     }
+
+    /* ── PRINT ───────────────────────── */
+    @media print {
+      nav, .marquee-wrap, .scroll-indicator, .skip { display: none; }
+      .hero { padding-top: 1rem; }
+      .anim-1, .anim-2, .anim-3, .anim-4, .anim-5, .reveal, .reveal-d1 { opacity: 1 !important; transform: none !important; animation: none !important; }
+    }
   </style>
 </head>
 <body>
 
+  <a href="#main" class="skip">Skip to content</a>
+
   <!-- NAV -->
-  <nav>
+  <nav aria-label="Primary">
     <div class="nav-inner">
       <a href="#" class="nav-logo">Evan Frazer</a>
       <ul class="nav-links">
-        <li><a href="#work" class="active">Work</a></li>
+        <li><a href="#work">Work</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -428,7 +474,7 @@
     </div>
   </nav>
 
-  <main>
+  <main id="main">
 
     <!-- HERO -->
     <section class="hero">
@@ -436,46 +482,46 @@
         <div class="hero-top">
           <div style="max-width:860px;">
             <span class="hero-eyebrow anim-1">Indianapolis, IN &nbsp;&middot;&nbsp; IT &amp; Systems Engineering</span>
-            <h1 class="hero-h1 anim-2">IT SPECIALIST.<br/><span class="accent">BUILDER.</span> ENGINEER<br/>IN PROGRESS.</h1>
+            <h1 class="hero-h1 anim-2">IT SPECIALIST.<br/><span class="accent">BUILDER.</span> SYSTEMS<br/>&amp; CLOUD ENGINEER.</h1>
           </div>
-          <div class="scroll-indicator anim-3">
-            <div class="scroll-ring"><span class="material-symbols-outlined">arrow_downward</span></div>
+          <div class="scroll-indicator anim-3" aria-hidden="true">
+            <div class="scroll-ring"><svg class="icon" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div>
             <span class="scroll-label">Scroll</span>
           </div>
         </div>
 
         <div class="hero-grid anim-4">
-          <!-- Homelab visual -->
+          <!-- Homelab visual (illustrative layout, not live status) -->
           <div class="hero-visual">
             <div class="hv-overlay"></div>
             <div class="hv-grid-bg"></div>
             <div class="hv-terminal">
-              <div class="terminal-label">$ proxmox &mdash; status</div>
+              <div class="terminal-label">$ homelab &mdash; architecture</div>
               <div class="terminal-lines">
-                <div><span class="dot-on">&#9679;</span> pve &mdash; node online</div>
-                <div><span class="dot-on">&#9679;</span> lxc/100 &mdash; docker host</div>
-                <div><span class="dot-on">&#9679;</span> lxc/101 &mdash; homebridge</div>
-                <div><span class="dot-on">&#9679;</span> vm/200 &mdash; wristband</div>
-                <div><span class="dot-off">&#9679;</span> vm/201 &mdash; standby</div>
+                <div><span class="dot-on">&#9679;</span> pve &mdash; Proxmox VE host</div>
+                <div><span class="dot-on">&#9679;</span> truenas &mdash; zfs mirror</div>
+                <div><span class="dot-on">&#9679;</span> ubuntu &mdash; 16 containers</div>
+                <div><span class="dot-on">&#9679;</span> windows &mdash; media servers</div>
+                <div><span class="dot-on">&#9679;</span> backups &mdash; weekly &middot; offsite copy</div>
               </div>
             </div>
             <div class="hv-footer">
               <p>Homelab Infrastructure</p>
-              <span>Proxmox &middot; Docker &middot; LXC</span>
+              <span>Proxmox &middot; TrueNAS &middot; Docker</span>
             </div>
           </div>
 
           <!-- Side cards -->
           <div class="hero-cards">
             <div class="hero-card blue">
-              <span class="material-symbols-outlined hc-icon">verified_user</span>
+              <svg class="icon hc-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M6 17c.5-2 2-3 3-3s2.5 1 3 3M14 9h4M14 13h4"/></svg>
               <div>
-                <p class="hc-label">Certified</p>
-                <p class="hc-title">CompTIA A+<br/>AWS Cloud Quest<br/>DaVinci Resolve 18</p>
+                <p class="hc-label">Credentials</p>
+                <p class="hc-title">CompTIA A+ (expired)<br/>AWS Cloud Quest (training)<br/>B.A. Communication Studies</p>
               </div>
             </div>
             <div class="hero-card light">
-              <span class="material-symbols-outlined hc-icon">code</span>
+              <svg class="icon hc-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8l-5 4 5 4M16 8l5 4-5 4M14 5l-4 14"/></svg>
               <div>
                 <p class="hc-label">Currently Building</p>
                 <p class="hc-title">Wristband &amp; Repflow<br/><span class="accent">in production</span></p>
@@ -486,36 +532,42 @@
 
         <!-- Bio strip -->
         <div class="hero-bio-strip anim-5">
-          <p class="hero-bio">Over three years of enterprise IT support at IHCDA, a CompTIA A+ certification, and nights spent building full-stack apps and self-hosted infrastructure on Proxmox. I bridge reliable systems with the engineering that comes next.</p>
+          <p class="hero-bio">Systems-focused IT professional with 4+ years supporting endpoints, virtual desktops, and vulnerability management for a state government agency, plus a self-built Proxmox/TrueNAS homelab running Docker services with backups, tested restores, and zero-exposure remote access. Seeking a Systems Administrator or Cloud Engineer role.</p>
           <div class="hero-btns">
             <a href="#work" class="btn-dark">View Work</a>
             <a href="mailto:frazerevan18&#64;gmail.com" class="btn-outline">Get in Touch</a>
+            <!-- To add a resume button once a public-safe PDF (no phone or home address) is uploaded:
+                 <a href="EvanFrazer_Resume.pdf" class="btn-outline">Resume (PDF)</a> -->
           </div>
         </div>
       </div>
     </section>
 
-    <!-- MARQUEE -->
+    <!-- MARQUEE (second set is a visual duplicate for the loop, hidden from screen readers) -->
     <div class="marquee-wrap">
       <div class="ticker-inner">
-        <span class="ticker-item">Windows Administration</span><span class="ticker-item ticker-dot">&middot;</span>
-        <span class="ticker-item">Active Directory</span><span class="ticker-item ticker-dot">&middot;</span>
-        <span class="ticker-item">Proxmox / Hypervisors</span><span class="ticker-item ticker-dot">&middot;</span>
-        <span class="ticker-item">Docker &amp; Containers</span><span class="ticker-item ticker-dot">&middot;</span>
-        <span class="ticker-item">Linux Administration</span><span class="ticker-item ticker-dot">&middot;</span>
-        <span class="ticker-item">React / Node.js</span><span class="ticker-item ticker-dot">&middot;</span>
-        <span class="ticker-item">AWS</span><span class="ticker-item ticker-dot">&middot;</span>
-        <span class="ticker-item">Swift / SwiftUI</span><span class="ticker-item ticker-dot">&middot;</span>
-        <span class="ticker-item">Rapid7</span><span class="ticker-item ticker-dot">&middot;</span>
-        <span class="ticker-item">Windows Administration</span><span class="ticker-item ticker-dot">&middot;</span>
-        <span class="ticker-item">Active Directory</span><span class="ticker-item ticker-dot">&middot;</span>
-        <span class="ticker-item">Proxmox / Hypervisors</span><span class="ticker-item ticker-dot">&middot;</span>
-        <span class="ticker-item">Docker &amp; Containers</span><span class="ticker-item ticker-dot">&middot;</span>
-        <span class="ticker-item">Linux Administration</span><span class="ticker-item ticker-dot">&middot;</span>
-        <span class="ticker-item">React / Node.js</span><span class="ticker-item ticker-dot">&middot;</span>
-        <span class="ticker-item">AWS</span><span class="ticker-item ticker-dot">&middot;</span>
-        <span class="ticker-item">Swift / SwiftUI</span><span class="ticker-item ticker-dot">&middot;</span>
-        <span class="ticker-item">Rapid7</span><span class="ticker-item ticker-dot">&middot;</span>
+        <div class="ticker-set">
+          <span class="ticker-item">Windows Administration</span><span class="ticker-item ticker-dot" aria-hidden="true">&middot;</span>
+          <span class="ticker-item">Proxmox / Hypervisors</span><span class="ticker-item ticker-dot" aria-hidden="true">&middot;</span>
+          <span class="ticker-item">TrueNAS &amp; ZFS</span><span class="ticker-item ticker-dot" aria-hidden="true">&middot;</span>
+          <span class="ticker-item">Docker &amp; Containers</span><span class="ticker-item ticker-dot" aria-hidden="true">&middot;</span>
+          <span class="ticker-item">Linux Administration</span><span class="ticker-item ticker-dot" aria-hidden="true">&middot;</span>
+          <span class="ticker-item">Cloudflare &amp; Tailscale</span><span class="ticker-item ticker-dot" aria-hidden="true">&middot;</span>
+          <span class="ticker-item">AWS WorkSpaces</span><span class="ticker-item ticker-dot" aria-hidden="true">&middot;</span>
+          <span class="ticker-item">Vulnerability Management</span><span class="ticker-item ticker-dot" aria-hidden="true">&middot;</span>
+          <span class="ticker-item">ServiceNow / ITSM</span><span class="ticker-item ticker-dot" aria-hidden="true">&middot;</span>
+        </div>
+        <div class="ticker-set" aria-hidden="true">
+          <span class="ticker-item">Windows Administration</span><span class="ticker-item ticker-dot">&middot;</span>
+          <span class="ticker-item">Proxmox / Hypervisors</span><span class="ticker-item ticker-dot">&middot;</span>
+          <span class="ticker-item">TrueNAS &amp; ZFS</span><span class="ticker-item ticker-dot">&middot;</span>
+          <span class="ticker-item">Docker &amp; Containers</span><span class="ticker-item ticker-dot">&middot;</span>
+          <span class="ticker-item">Linux Administration</span><span class="ticker-item ticker-dot">&middot;</span>
+          <span class="ticker-item">Cloudflare &amp; Tailscale</span><span class="ticker-item ticker-dot">&middot;</span>
+          <span class="ticker-item">AWS WorkSpaces</span><span class="ticker-item ticker-dot">&middot;</span>
+          <span class="ticker-item">Vulnerability Management</span><span class="ticker-item ticker-dot">&middot;</span>
+          <span class="ticker-item">ServiceNow / ITSM</span><span class="ticker-item ticker-dot">&middot;</span>
+        </div>
       </div>
     </div>
 
@@ -528,8 +580,68 @@
         </div>
         <div class="projects-grid">
 
+          <!-- Homelab -->
+          <div class="project-card reveal">
+            <div class="project-banner banner-homelab">
+              <div class="banner-grid-overlay"></div>
+              <div class="banner-center">
+                <div class="app-icon glyph"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><path d="M7 7h.01M7 17h.01"/></svg></div>
+                <span class="banner-name">Homelab</span>
+              </div>
+              <div class="banner-tags">
+                <span class="tag">Proxmox VE</span>
+                <span class="tag">TrueNAS</span>
+                <span class="tag">Ubuntu Server</span>
+                <span class="tag">Docker</span>
+              </div>
+            </div>
+            <div class="project-body">
+              <span class="project-category">Infrastructure</span>
+              <div class="project-head-row">
+                <h3 class="project-name">Self-hosted, backed up, restorable.</h3>
+              </div>
+              <p class="project-desc">A custom Proxmox VE host running TrueNAS for network storage, an Ubuntu Server VM hosting 16 Docker containers, and a Windows VM for media servers and game emulators &mdash; supporting everything from NAS storage to smart home automation.</p>
+              <ul class="project-bullets">
+                <li><span class="dash">&mdash;</span><span>RAID 1 mirror in TrueNAS plus weekly Proxmox backups (snapshot mode, zstd-compressed) of all three VMs, with email notifications and two weekly copies retained</span></li>
+                <li><span class="dash">&mdash;</span><span>Offsite cloud copy of the backups for restoring the host to its current configuration &middot; restore from backup tested</span></li>
+                <li><span class="dash">&mdash;</span><span>Monitored from the Proxmox dashboard &middot; updates applied manually every week or two</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Secure remote access -->
+          <div class="project-card reveal reveal-d1">
+            <div class="project-banner banner-remote">
+              <div class="banner-grid-overlay"></div>
+              <div class="banner-center">
+                <div class="app-icon glyph"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><rect x="9" y="11" width="6" height="5" rx="1"/><path d="M10 11V9.5a2 2 0 014 0V11"/></svg></div>
+                <span class="banner-name">Remote Access</span>
+              </div>
+              <div class="banner-tags">
+                <span class="tag">Cloudflare</span>
+                <span class="tag">Tailscale</span>
+                <span class="tag">Reverse Proxy</span>
+              </div>
+            </div>
+            <div class="project-body">
+              <span class="project-category">Networking &amp; Security</span>
+              <div class="project-head-row">
+                <h3 class="project-name">Off-network access, zero inbound ports.</h3>
+              </div>
+              <p class="project-desc">Designed secure off-network access to self-hosted services, using a reverse proxy in front and a private Tailscale mesh behind it.</p>
+              <ul class="project-bullets">
+                <li><span class="dash">&mdash;</span><span>Access routed through Cloudflare, with proxied traffic carried over the Tailscale mesh</span></li>
+                <li><span class="dash">&mdash;</span><span>Reverse proxying managed centrally</span></li>
+                <li><span class="dash">&mdash;</span><span>No inbound ports open on the home network</span></li>
+              </ul>
+            </div>
+          </div>
+
           <!-- Wristband -->
           <div class="project-card reveal">
+            <!-- To link a project or add a screenshot, inside .project-body add e.g.:
+                 <a href="https://..." target="_blank" rel="noopener" class="exp-link">View project</a>
+                 and put the screenshot in this folder and use <img src="wristband-screenshot.jpg" alt="..."> in .project-banner. -->
             <div class="project-banner banner-wristband">
               <div class="banner-grid-overlay"></div>
               <div class="banner-center">
@@ -548,7 +660,6 @@
               <span class="project-category">Full-Stack Web App</span>
               <div class="project-head-row">
                 <h3 class="project-name">Concert tracking, reimagined.</h3>
-                <span class="material-symbols-outlined project-arrow">north_east</span>
               </div>
               <p class="project-desc">A friend tracked concerts in his Notes app. Wristband is the Letterboxd for live music: log shows, rate performances, track setlists, and follow friends. Running in production on a self-hosted homelab server with a full Docker Compose stack.</p>
               <ul class="project-bullets">
@@ -579,7 +690,6 @@
               <span class="project-category">Native iOS App</span>
               <div class="project-head-row">
                 <h3 class="project-name">Strength training, engineered.</h3>
-                <span class="material-symbols-outlined project-arrow">north_east</span>
               </div>
               <p class="project-desc">A workout app with a lifetime license switched to a subscription model retroactively. Rather than accept that, Repflow was built as a replacement &mdash; native iOS, fully local, no account, no subscription. Then came NLP logging, algorithmic programming, and HealthKit.</p>
               <ul class="project-bullets">
@@ -601,28 +711,28 @@
           <div><h2 class="skills-head">Technical Arsenal</h2></div>
           <div class="skills-grid">
             <div class="skill-group">
-              <div class="skill-group-label">Certifications</div>
-              <ul><li>CompTIA A+</li><li>AWS Cloud Quest</li><li>DaVinci Resolve 18</li></ul>
+              <div class="skill-group-label">Virtualization &amp; Storage</div>
+              <ul><li>Proxmox VE (VM backups)</li><li>TrueNAS (ZFS, RAID 1)</li><li>Docker</li></ul>
             </div>
             <div class="skill-group">
-              <div class="skill-group-label">Systems</div>
-              <ul><li>Windows 10/11 Admin</li><li>Active Directory</li><li>Linux Administration</li><li>Proxmox / Hypervisors</li><li>Docker &amp; Containers</li></ul>
+              <div class="skill-group-label">Networking &amp; Security</div>
+              <ul><li>Cloudflare</li><li>Tailscale</li><li>Reverse Proxying</li><li>Vulnerability Management (Rapid7)</li></ul>
             </div>
             <div class="skill-group">
               <div class="skill-group-label">Cloud</div>
-              <ul><li>AWS</li><li>Supabase</li><li>Docker Compose</li><li>GitHub Actions</li></ul>
+              <ul><li>AWS (Amazon WorkSpaces onboarding and support)</li><li>AWS Cloud Practitioner (in training)</li></ul>
             </div>
             <div class="skill-group">
-              <div class="skill-group-label">Development</div>
-              <ul><li>React / JavaScript</li><li>Node.js / Express</li><li>Swift / SwiftUI</li><li>PostgreSQL / SQL</li><li>Python</li></ul>
+              <div class="skill-group-label">Operating Systems</div>
+              <ul><li>Windows 10/11 Administration</li><li>Linux Administration (Ubuntu Server)</li></ul>
             </div>
             <div class="skill-group">
-              <div class="skill-group-label">Tools</div>
-              <ul><li>Rapid7</li><li>Help Desk / ITSM</li><li>LM Studio / Ollama</li></ul>
+              <div class="skill-group-label">Enterprise Tools</div>
+              <ul><li>ServiceNow (ITSM)</li><li>Microsoft 365</li><li>SharePoint</li><li>Microsoft Copilot</li><li>Claims &amp; application management platform</li><li>Digital signage management</li></ul>
             </div>
             <div class="skill-group">
-              <div class="skill-group-label">Creative</div>
-              <ul><li>DaVinci Resolve</li><li>Videography</li><li>Photography</li><li>3D Printing</li></ul>
+              <div class="skill-group-label">App Development</div>
+              <ul><li>React &amp; Node.js</li><li>Supabase</li><li>Swift &amp; SwiftUI</li><li>Docker Compose</li></ul>
             </div>
           </div>
         </div>
@@ -639,44 +749,54 @@
 
         <div class="exp-list reveal">
           <div class="exp-row">
-            <div class="exp-date">2022 &mdash; Present</div>
+            <div class="exp-date">Aug 2022 &mdash; Present</div>
             <div>
               <div class="exp-top">
                 <span class="exp-employer">IHCDA</span>
                 <span class="exp-role">IT Technical Support Specialist</span>
               </div>
               <ul class="exp-bullets">
-                <li><span class="dash">&mdash;</span><span>Led <strong>151-unit Dell endpoint refresh</strong> &mdash; 32GB RAM / 512GB SSD &mdash; coordinated with state IOT team</span></li>
-                <li><span class="dash">&mdash;</span><span>Directed agency-wide <strong>Windows 11 migration</strong> with zero downtime for critical services</span></li>
-                <li><span class="dash">&mdash;</span><span>Managed vulnerability monitoring and endpoint security via <strong>Rapid7</strong></span></li>
-                <li><span class="dash">&mdash;</span><span>Handled disaster recovery planning, vendor coordination, and Active Directory administration</span></li>
+                <li><span class="dash">&mdash;</span><span>Migrated <strong>200+ endpoints</strong> from Windows 10 to Windows 11 with the state IOT team ahead of the October 2025 end-of-support deadline, coordinating scheduling, software requirements, device inventory, and post-migration support with zero significant service interruptions</span></li>
+                <li><span class="dash">&mdash;</span><span>Delivered an agency-wide refresh of <strong>151 Dell laptops</strong>, coordinating procurement, compatibility surveys, scheduling, and post-deployment support; tested candidate models as a pilot user before final selection</span></li>
+                <li><span class="dash">&mdash;</span><span>Use <strong>Rapid7</strong> to scan agency devices for vulnerabilities, remediate findings, and report results</span></li>
+                <li><span class="dash">&mdash;</span><span>Onboard remote staff to the agency&rsquo;s <strong>Amazon WorkSpaces</strong> (AWS) virtual desktop environment, handling connection setup and user training</span></li>
+                <li><span class="dash">&mdash;</span><span>Resolve <strong>100+ monthly help desk tickets</strong> in ServiceNow for agency staff</span></li>
               </ul>
+              <details class="exp-more">
+                <summary><span class="more-closed">Show 5 more</span><span class="more-open">Show less</span></summary>
+                <ul class="exp-bullets">
+                  <li><span class="dash">&mdash;</span><span>Evaluate and deploy hardware and software agency-wide, advising leadership on technology purchases and managing vendor coordination through AV and conference room installations from scoping to commissioning</span></li>
+                  <li><span class="dash">&mdash;</span><span>Support the agency&rsquo;s claims and application management platform, handling user access and troubleshooting</span></li>
+                  <li><span class="dash">&mdash;</span><span>Part of the early <strong>Microsoft Copilot</strong> pilot group ahead of the statewide rollout; provided feedback, assisted coworkers with access requests, and helped deliver training sessions</span></li>
+                  <li><span class="dash">&mdash;</span><span>Manage the agency&rsquo;s digital signage network, creating and publishing internal communications content</span></li>
+                  <li><span class="dash">&mdash;</span><span>Volunteered for the agency&rsquo;s response to the August 2026 statewide storm and flooding disaster: survivor intake from Indiana 211 referrals, statewide hotel placement under the temporary housing voucher program, multi-county outreach, and recruiting staff and volunteers for outreach sites</span></li>
+                </ul>
+              </details>
             </div>
           </div>
           <div class="exp-row">
-            <div class="exp-date">2021 &mdash; 2022</div>
+            <div class="exp-date">Aug 2021 &mdash; Aug 2022</div>
             <div>
               <div class="exp-top">
                 <span class="exp-employer">Apple</span>
                 <span class="exp-role">Technical Specialist</span>
               </div>
               <ul class="exp-bullets">
-                <li><span class="dash">&mdash;</span><span>Diagnosed and resolved hardware, software, and account issues for high volumes of customers</span></li>
-                <li><span class="dash">&mdash;</span><span>Guided customers through product selection by translating technical specifications into clear, actionable recommendations</span></li>
-                <li><span class="dash">&mdash;</span><span>Delivered onboarding support including device setup, data migration, and account configuration for a high volume of customers daily</span></li>
+                <li><span class="dash">&mdash;</span><span>Diagnosed and resolved hardware, software, and account issues across a high daily volume of customers</span></li>
+                <li><span class="dash">&mdash;</span><span>Delivered device setup, data migration, and account configuration, translating technical detail into clear guidance</span></li>
               </ul>
             </div>
           </div>
           <div class="exp-row">
-            <div class="exp-date">2019 &mdash; 2021</div>
+            <div class="exp-date">Jan 2019 &mdash; May 2021</div>
             <div>
               <div class="exp-top">
-                <span class="exp-employer">IUPUI Campus Center</span>
+                <span class="exp-employer">IUPUI Campus Center &amp; Student Experiences</span>
                 <span class="exp-role">Operations Lead</span>
               </div>
               <ul class="exp-bullets">
                 <li><span class="dash">&mdash;</span><span>Led daily operations for a high-traffic student facility and coordinated cross-department workflows</span></li>
-                <li><span class="dash">&mdash;</span><span>Identified and resolved operational gaps, including absorbing responsibilities from an under-contributing team member to maintain service quality and project continuity</span></li>
+                <li><span class="dash">&mdash;</span><span>Maintained service quality and project continuity during staffing gaps</span></li>
                 <li><span class="dash">&mdash;</span><span>Trained and mentored new staff members on policies and standard operating procedures</span></li>
               </ul>
             </div>
@@ -686,30 +806,31 @@
         <!-- About blurb -->
         <div class="about-grid reveal">
           <div class="about-text">
-            <p>I hold a B.A. in Communication Studies from IUPUI, with a minor in Video Production. Both portfolio projects started as personal tools &mdash; Wristband because a friend was tracking concerts in his Notes app, Repflow because a workout app I paid for switched to subscriptions. Both are running in production today.</p>
-            <p>Wristband runs on a self-hosted homelab server (Proxmox + Docker Compose). Repflow is in daily use on my phone. Both were built with AI assistance as a core part of the development workflow &mdash; identifying the right tools, reviewing output, and getting from idea to production efficiently.</p>
-            <p>I&rsquo;m actively pursuing growth into systems and cloud engineering, with hands-on homelab experience spanning Proxmox, Docker, LXC containers, and self-hosted infrastructure.</p>
+            <p>I work in IT at the Indiana Housing &amp; Community Development Authority (IHCDA), a state agency, and I&rsquo;m pursuing a Systems Administrator or Cloud Engineer role.</p>
+            <p>Outside of work I run a self-built homelab &mdash; Proxmox, TrueNAS, and Docker &mdash; with backups, tested restores, and remote access that keeps every inbound port closed. I also build apps: Wristband, because a friend was tracking concerts in his Notes app, and Repflow, because a workout app I paid for switched to subscriptions. Both are running in production today and were built with AI assistance as a core part of the development workflow &mdash; identifying the right tools, reviewing output, and getting from idea to production efficiently.</p>
+            <!-- To link the photography/videography site, wrap "photography/videography portfolio site" in <a href="https://..." target="_blank" rel="noopener" class="exp-link"> -->
+            <p>I also maintain a photography/videography portfolio site alongside this one.</p>
           </div>
           <div class="fact-cards">
             <div class="fact-card">
-              <span class="material-symbols-outlined fact-icon">school</span>
+              <svg class="icon fact-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11.5V16c0 1.5 3 3 6 3s6-1.5 6-3v-4.5"/></svg>
               <div>
                 <p class="fact-label">Education</p>
-                <p class="fact-value">B.A. Communication Studies, IUPUI<br/><span class="muted">Minor: Video Production</span></p>
+                <p class="fact-value">B.A. Communication Studies, IUPUI<br/><span class="muted">Minor: Video Production<br/>200+ hours of independent research producing a roommate-assignment recommendation report later adopted by the department</span></p>
               </div>
             </div>
             <div class="fact-card">
-              <span class="material-symbols-outlined fact-icon">location_on</span>
+              <svg class="icon fact-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.5 3-6 6-6s6 2.5 6 6M16 14.5c3 0 5 2 5 5"/></svg>
               <div>
-                <p class="fact-label">Location</p>
-                <p class="fact-value">Indianapolis, IN</p>
+                <p class="fact-label">Professional Development</p>
+                <p class="fact-value">Represented IHCDA at the INAHA Affordable Housing Conference &amp; Annual Meeting as keynote sponsor<br/><span class="muted">Nov 2025</span><br/>Attended the Indiana Mortgage Bankers Association 2025 Technology Conference on AI and mortgage technology<br/><span class="muted">Nov 2025</span></p>
               </div>
             </div>
             <div class="fact-card">
-              <span class="material-symbols-outlined fact-icon">interests</span>
+              <svg class="icon fact-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.5l-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg>
               <div>
                 <p class="fact-label">Interests</p>
-                <p class="fact-value">Guitar &middot; Drums &middot; Bass &middot; PC Building &middot; 3D Printing &middot; Videography &amp; Photography</p>
+                <p class="fact-value">PC Building &middot; 3D Printing &middot; Photography &amp; Videography &middot; Guitar &amp; Bass</p>
               </div>
             </div>
           </div>
@@ -735,6 +856,7 @@
             <p class="contact-card-label">GitHub</p>
             <p class="contact-card-value">github.com/evanfrazer</p>
           </a>
+          <!-- To add LinkedIn, copy the GitHub card above and change the label, href, and text. -->
           <div class="contact-card">
             <p class="contact-card-label">Location</p>
             <p class="contact-card-value">Indianapolis, IN</p>
